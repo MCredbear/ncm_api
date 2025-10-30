@@ -29,6 +29,7 @@ pub mod artist_unsub;
 pub mod artist_top_song;
 pub mod artist_video;
 pub mod artists;
+pub mod banner;
 pub mod captcha_sent;
 pub mod captcha_verify;
 pub mod cloudsearch;
