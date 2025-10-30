@@ -1,7 +1,7 @@
 use crate::constant::*;
 use once_cell::sync::Lazy;
-use serde_json::{Value, json};
 use reqwest::Client;
+use serde_json::{Value, json};
 
 pub mod album;
 pub mod album_detail;
@@ -12,8 +12,8 @@ pub mod album_new;
 pub mod album_newest;
 pub mod album_songsaleboard;
 pub mod album_sub;
-pub mod album_unsub;
 pub mod album_sublist;
+pub mod album_unsub;
 pub mod artist_album;
 pub mod artist_desc;
 pub mod artist_detail;
@@ -25,16 +25,22 @@ pub mod artist_new_mv;
 pub mod artist_new_song;
 pub mod artist_songs;
 pub mod artist_sub;
-pub mod artist_unsub;
 pub mod artist_top_song;
+pub mod artist_unsub;
 pub mod artist_video;
 pub mod artists;
 pub mod banner;
 pub mod captcha_sent;
 pub mod captcha_verify;
+pub mod cellphone_existence_check;
 pub mod cloudsearch;
 pub mod login;
 pub mod login_cellphone;
+pub mod login_qr_check;
+pub mod login_qr_key;
+pub mod login_refresh;
+pub mod login_status;
+pub mod logout;
 pub mod lyric;
 pub mod search;
 pub mod search_defailt;
@@ -126,6 +132,7 @@ async fn request(
 async fn login_request(
     api: String,
     data: serde_json::Value,
+    cookie: Option<Cookie>,
     crypto: Crypto,
 ) -> Result<(serde_json::Value, Cookie), Box<dyn std::error::Error>> {
     let resp = match crypto {
@@ -137,7 +144,10 @@ async fn login_request(
                     api,
                     serde_urlencoded::to_string(data)?
                 ))
-                .header("Cookie", "NMTID=; MUSIC_U=; __remember_me=true; os=pc")
+                .header(
+                    "Cookie",
+                    cookie.unwrap_or("NMTID=; MUSIC_U=; __remember_me=true; os=pc".to_string()),
+                )
                 .send()
                 .await?
         }

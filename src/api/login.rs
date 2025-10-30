@@ -16,7 +16,7 @@ pub async fn login(
       "password": format!("{:x}", md5::compute(password.as_bytes())),
       "rememberLogin": "true",
     });
-    let resp = login_request(API.to_string(), data, crypto.unwrap_or(Crypto::Api)).await?;
+    let resp = login_request(API.to_string(), data, None, crypto.unwrap_or(Crypto::Api)).await?;
 
     Ok(resp)
 }
