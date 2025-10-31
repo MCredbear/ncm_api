@@ -42,6 +42,7 @@ pub mod login_refresh;
 pub mod login_status;
 pub mod logout;
 pub mod lyric;
+pub mod lyric_new;
 pub mod search;
 pub mod search_defailt;
 pub mod search_voice;
