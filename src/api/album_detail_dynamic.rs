@@ -5,7 +5,7 @@ use serde_json::{Value, json};
 const API: &str = "album/detail/dynamic";
 
 pub async fn album_detail_dynamic(
-    id: String,
+    id: u32,
     cookie: Option<String>,
     crypto: Option<Crypto>,
 ) -> Result<Value, Box<dyn std::error::Error>> {
@@ -23,7 +23,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_api_album_detail_dynamic() -> Result<(), Box<dyn std::error::Error>> {
-        let resp = album_detail_dynamic("81099298".into(), None, Some(Crypto::Api)).await?;
+        let resp = album_detail_dynamic(81099298, None, Some(Crypto::Api)).await?;
         println!("{}", resp);
 
         Ok(())
@@ -31,7 +31,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_linuxapi_album_detail_dynamic() -> Result<(), Box<dyn std::error::Error>> {
-        let resp = album_detail_dynamic("81099298".into(), None, Some(Crypto::Linuxapi)).await?;
+        let resp = album_detail_dynamic(81099298, None, Some(Crypto::Linuxapi)).await?;
         println!("{}", resp);
 
         Ok(())
@@ -39,7 +39,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_weapi_album_detail_dynamic() -> Result<(), Box<dyn std::error::Error>> {
-        let resp = album_detail_dynamic("81099298".into(), None, Some(Crypto::Weapi)).await?;
+        let resp = album_detail_dynamic(81099298, None, Some(Crypto::Weapi)).await?;
         println!("{}", resp);
 
         Ok(())
@@ -47,7 +47,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_eapi_album_detail_dynamic() -> Result<(), Box<dyn std::error::Error>> {
-        let resp = album_detail_dynamic("81099298".into(), None, Some(Crypto::Eapi)).await?;
+        let resp = album_detail_dynamic(81099298, None, Some(Crypto::Eapi)).await?;
         println!("{}", resp);
 
         Ok(())

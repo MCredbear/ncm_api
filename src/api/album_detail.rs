@@ -6,20 +6,14 @@ const API: &str = "vipmall/albumproduct/detail";
 
 /// 数字专辑详情
 pub async fn album_detail(
-    id: String,
+    id: u32,
     cookie: Option<String>,
     crypto: Option<Crypto>,
 ) -> Result<Value, Box<dyn std::error::Error>> {
     let data = json!({
         "id": id,
     });
-    let resp = request(
-        API.to_string(),
-        data,
-        cookie,
-        crypto.unwrap_or(Crypto::Api),
-    )
-    .await?;
+    let resp = request(API.to_string(), data, cookie, crypto.unwrap_or(Crypto::Api)).await?;
 
     Ok(resp)
 }
@@ -30,7 +24,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_api_album_detail() -> Result<(), Box<dyn std::error::Error>> {
-        let resp = album_detail("114514".into(), None, Some(Crypto::Weapi)).await?;
+        let resp = album_detail(114514, None, Some(Crypto::Weapi)).await?;
         println!("{}", resp);
 
         Ok(())
@@ -38,7 +32,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_linuxapi_album_detail() -> Result<(), Box<dyn std::error::Error>> {
-        let resp = album_detail("114514".into(), None, Some(Crypto::Linuxapi)).await?;
+        let resp = album_detail(114514, None, Some(Crypto::Linuxapi)).await?;
         println!("{}", resp);
 
         Ok(())
@@ -46,7 +40,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_weapi_album_detail() -> Result<(), Box<dyn std::error::Error>> {
-        let resp = album_detail("114514".into(), None, Some(Crypto::Weapi)).await?;
+        let resp = album_detail(114514, None, Some(Crypto::Weapi)).await?;
         println!("{}", resp);
 
         Ok(())
@@ -54,7 +48,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_eapi_album_detail() -> Result<(), Box<dyn std::error::Error>> {
-        let resp = album_detail("114514".into(), None, Some(Crypto::Eapi)).await?;
+        let resp = album_detail(114514, None, Some(Crypto::Eapi)).await?;
         println!("{}", resp);
 
         Ok(())

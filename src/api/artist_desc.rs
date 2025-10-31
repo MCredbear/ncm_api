@@ -6,7 +6,7 @@ const API: &str = "artist/introduction";
 
 /// 歌手介绍
 pub async fn artist_desc(
-    id: String,
+    id: u32,
     cookie: Option<String>,
     crypto: Option<Crypto>,
 ) -> Result<Value, Box<dyn std::error::Error>> {
@@ -24,7 +24,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_api_artist_desc() -> Result<(), Box<dyn std::error::Error>> {
-        let resp = artist_desc("30229793".into(), None, Some(Crypto::Api)).await?;
+        let resp = artist_desc(30229793, None, Some(Crypto::Api)).await?;
         println!("{}", resp);
 
         Ok(())
@@ -32,7 +32,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_linuxapi_artist_desc() -> Result<(), Box<dyn std::error::Error>> {
-        let resp = artist_desc("30229793".into(), None, Some(Crypto::Linuxapi)).await?;
+        let resp = artist_desc(30229793, None, Some(Crypto::Linuxapi)).await?;
         println!("{}", resp);
 
         Ok(())
@@ -40,7 +40,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_weapi_artist_desc() -> Result<(), Box<dyn std::error::Error>> {
-        let resp = artist_desc("30229793".into(), None, Some(Crypto::Weapi)).await?;
+        let resp = artist_desc(30229793, None, Some(Crypto::Weapi)).await?;
         println!("{}", resp);
 
         Ok(())
@@ -48,7 +48,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_eapi_artist_desc() -> Result<(), Box<dyn std::error::Error>> {
-        let resp = artist_desc("30229793".into(), None, Some(Crypto::Eapi)).await?;
+        let resp = artist_desc(30229793, None, Some(Crypto::Eapi)).await?;
         println!("{}", resp);
 
         Ok(())

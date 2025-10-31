@@ -6,7 +6,7 @@ const API: &str = "mlog/artist/video";
 
 /// 歌手相关视频
 pub async fn artist_video(
-    artist_id: String,
+    artist_id: u32,
     size: Option<u32>,
     cursor: Option<u64>,
     order: Option<u8>,
@@ -34,8 +34,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_api_artist_video() -> Result<(), Box<dyn std::error::Error>> {
-        let resp =
-            artist_video("30229793".into(), None, None, None, None, Some(Crypto::Api)).await?;
+        let resp = artist_video(30229793, None, None, None, None, Some(Crypto::Api)).await?;
         println!("{}", resp);
 
         Ok(())
@@ -43,15 +42,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_linuxapi_artist_video() -> Result<(), Box<dyn std::error::Error>> {
-        let resp = artist_video(
-            "30229793".into(),
-            None,
-            None,
-            None,
-            None,
-            Some(Crypto::Linuxapi),
-        )
-        .await?;
+        let resp = artist_video(30229793, None, None, None, None, Some(Crypto::Linuxapi)).await?;
         println!("{}", resp);
 
         Ok(())
@@ -59,15 +50,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_weapi_artist_video() -> Result<(), Box<dyn std::error::Error>> {
-        let resp = artist_video(
-            "30229793".into(),
-            None,
-            None,
-            None,
-            None,
-            Some(Crypto::Weapi),
-        )
-        .await?;
+        let resp = artist_video(30229793, None, None, None, None, Some(Crypto::Weapi)).await?;
         println!("{}", resp);
 
         Ok(())
@@ -75,15 +58,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_eapi_artist_video() -> Result<(), Box<dyn std::error::Error>> {
-        let resp = artist_video(
-            "30229793".into(),
-            None,
-            None,
-            None,
-            None,
-            Some(Crypto::Eapi),
-        )
-        .await?;
+        let resp = artist_video(30229793, None, None, None, None, Some(Crypto::Eapi)).await?;
         println!("{}", resp);
 
         Ok(())

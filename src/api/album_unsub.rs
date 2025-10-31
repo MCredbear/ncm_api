@@ -6,7 +6,7 @@ const API: &str = "album/unsub";
 
 /// 取消收藏专辑
 pub async fn album_unsub(
-    id: String,
+    id: u32,
     cookie: Option<String>,
     crypto: Option<Crypto>,
 ) -> Result<Value, Box<dyn std::error::Error>> {
@@ -24,7 +24,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_api_album_sub() -> Result<(), Box<dyn std::error::Error>> {
-        let resp = album_unsub("81099298".into(), None, Some(Crypto::Api)).await?;
+        let resp = album_unsub(81099298, None, Some(Crypto::Api)).await?;
         println!("{}", resp);
 
         Ok(())
@@ -32,7 +32,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_linuxapi_album_sub() -> Result<(), Box<dyn std::error::Error>> {
-        let resp = album_unsub("81099298".into(), None, Some(Crypto::Linuxapi)).await?;
+        let resp = album_unsub(81099298, None, Some(Crypto::Linuxapi)).await?;
         println!("{}", resp);
 
         Ok(())
@@ -40,7 +40,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_weapi_album_sub() -> Result<(), Box<dyn std::error::Error>> {
-        let resp = album_unsub("81099298".into(), None, Some(Crypto::Weapi)).await?;
+        let resp = album_unsub(81099298, None, Some(Crypto::Weapi)).await?;
         println!("{}", resp);
 
         Ok(())
@@ -48,7 +48,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_eapi_album_sub() -> Result<(), Box<dyn std::error::Error>> {
-        let resp = album_unsub("81099298".into(), None, Some(Crypto::Eapi)).await?;
+        let resp = album_unsub(81099298, None, Some(Crypto::Eapi)).await?;
         println!("{}", resp);
 
         Ok(())

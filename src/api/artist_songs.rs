@@ -11,7 +11,7 @@ pub enum Order {
 
 /// 歌手单曲
 pub async fn artist_songs(
-    id: String,
+    id: u32,
     order: Option<Order>,
     offset: Option<u32>,
     limit: Option<u32>,
@@ -40,8 +40,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_api_artist_songs() -> Result<(), Box<dyn std::error::Error>> {
-        let resp =
-            artist_songs("30229793".into(), None, None, None, None, Some(Crypto::Api)).await?;
+        let resp = artist_songs(30229793, None, None, None, None, Some(Crypto::Api)).await?;
         println!("{}", resp);
 
         Ok(())
@@ -49,15 +48,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_linuxapi_artist_songs() -> Result<(), Box<dyn std::error::Error>> {
-        let resp = artist_songs(
-            "30229793".into(),
-            None,
-            None,
-            None,
-            None,
-            Some(Crypto::Linuxapi),
-        )
-        .await?;
+        let resp = artist_songs(30229793, None, None, None, None, Some(Crypto::Linuxapi)).await?;
         println!("{}", resp);
 
         Ok(())
@@ -65,15 +56,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_weapi_artist_songs() -> Result<(), Box<dyn std::error::Error>> {
-        let resp = artist_songs(
-            "30229793".into(),
-            None,
-            None,
-            None,
-            None,
-            Some(Crypto::Weapi),
-        )
-        .await?;
+        let resp = artist_songs(30229793, None, None, None, None, Some(Crypto::Weapi)).await?;
         println!("{}", resp);
 
         Ok(())
@@ -81,15 +64,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_eapi_artist_songs() -> Result<(), Box<dyn std::error::Error>> {
-        let resp = artist_songs(
-            "30229793".into(),
-            None,
-            None,
-            None,
-            None,
-            Some(Crypto::Eapi),
-        )
-        .await?;
+        let resp = artist_songs(30229793, None, None, None, None, Some(Crypto::Eapi)).await?;
         println!("{}", resp);
 
         Ok(())

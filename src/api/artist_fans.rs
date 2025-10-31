@@ -6,7 +6,7 @@ const API: &str = "artist/fans/get";
 
 /// 歌手粉丝
 pub async fn artist_fans(
-    id: String,
+    id: u32,
     limit: Option<u32>,
     offset: Option<u32>,
     cookie: Option<String>,
@@ -29,7 +29,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_api_artist_fans() -> Result<(), Box<dyn std::error::Error>> {
-        let resp = artist_fans("30229793".into(), None, None, None, Some(Crypto::Api)).await?;
+        let resp = artist_fans(30229793, None, None, None, Some(Crypto::Api)).await?;
         println!("{}", resp);
 
         Ok(())
@@ -37,7 +37,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_linuxapi_artist_fans() -> Result<(), Box<dyn std::error::Error>> {
-        let resp = artist_fans("30229793".into(), None, None, None, Some(Crypto::Linuxapi)).await?;
+        let resp = artist_fans(30229793, None, None, None, Some(Crypto::Linuxapi)).await?;
         println!("{}", resp);
 
         Ok(())
@@ -45,7 +45,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_weapi_artist_fans() -> Result<(), Box<dyn std::error::Error>> {
-        let resp = artist_fans("30229793".into(), None, None, None, Some(Crypto::Weapi)).await?;
+        let resp = artist_fans(30229793, None, None, None, Some(Crypto::Weapi)).await?;
         println!("{}", resp);
 
         Ok(())
@@ -53,7 +53,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_eapi_artist_fans() -> Result<(), Box<dyn std::error::Error>> {
-        let resp = artist_fans("30229793".into(), None, None, None, Some(Crypto::Eapi)).await?;
+        let resp = artist_fans(30229793, None, None, None, Some(Crypto::Eapi)).await?;
         println!("{}", resp);
 
         Ok(())
