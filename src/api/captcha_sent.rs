@@ -33,8 +33,7 @@ mod tests {
 
     #[tokio::test]
     async fn test_linuxapi_captcha_sent() -> Result<(), Box<dyn std::error::Error>> {
-        let resp =
-            captcha_sent("11451419198".to_string(), None, Some(Crypto::Linuxapi)).await?;
+        let resp = captcha_sent("11451419198".to_string(), None, Some(Crypto::Linuxapi)).await?;
         println!("{}", resp);
 
         Ok(())
