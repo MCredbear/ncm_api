@@ -4,7 +4,6 @@ use serde_json::{Value, json};
 
 const API: &str = "logout";
 
-/// 邮箱登录
 pub async fn logout(
     cookie: String,
     crypto: Option<Crypto>,

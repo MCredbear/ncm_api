@@ -4,7 +4,6 @@ use serde_json::{Value, json};
 
 const API: &str = "w/nuser/account/get";
 
-/// 登录刷新
 pub async fn login_status(
     cookie: Cookie,
     crypto: Option<Crypto>,
