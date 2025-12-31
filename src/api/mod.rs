@@ -56,7 +56,24 @@ pub mod search;
 pub mod search_defailt;
 pub mod search_voice;
 pub mod user_account;
+pub mod user_audio;
+pub mod user_binding;
+pub mod user_bindingcellphone;
+pub mod user_cloud;
+pub mod user_cloud_del;
+pub mod user_cloud_detail;
+pub mod user_comment_history;
 pub mod user_detail;
+pub mod user_dj;
+pub mod user_event;
+pub mod user_followeds;
+pub mod user_follows;
+pub mod user_level;
+pub mod user_playlist;
+pub mod user_record;
+pub mod user_replacephone;
+pub mod user_subcount;
+pub mod user_update;
 
 type Cookie = String;
 
