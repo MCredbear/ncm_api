@@ -12,6 +12,7 @@ pub async fn captcha_sent(
 ) -> Result<Value, Box<dyn std::error::Error>> {
     let data = json!({
         "cellphone": cellphone,
+        "secrete": "music_middleuser_pclogin".to_string(),
         "ctcode": ctcode.unwrap_or("86".to_string()),
     });
     let resp = request(API.to_string(), data, None, crypto.unwrap_or(Crypto::Api)).await?;

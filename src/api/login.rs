@@ -3,7 +3,7 @@ use crate::constant::*;
 use md5;
 use serde_json::{Value, json};
 
-const API: &str = "login";
+const API: &str = "w/login";
 
 /// 邮箱登录
 pub async fn login(

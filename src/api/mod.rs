@@ -2,6 +2,7 @@ use crate::constant::*;
 use once_cell::sync::Lazy;
 use reqwest::Client;
 use serde_json::{Value, json};
+use std::time::{SystemTime, UNIX_EPOCH};
 
 pub mod album;
 pub mod album_detail;
@@ -180,9 +181,31 @@ async fn request(
 async fn login_request(
     api: String,
     data: serde_json::Value,
-    cookie: Option<Cookie>,
     crypto: Crypto,
 ) -> Result<(serde_json::Value, Cookie), Box<dyn std::error::Error>> {
+    let ntes_nuid = (0..32)
+        .map(|_| {
+            let chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            chars
+                .chars()
+                .nth(rand::random::<u32>() as usize % chars.len())
+                .unwrap()
+        })
+        .collect::<String>();
+    let wnmcid_prefix = (0..6)
+        .map(|_| {
+            let chars = "abcdefghijklmnopqrstuvwxyz";
+            chars
+                .chars()
+                .nth(rand::random::<u32>() as usize % chars.len())
+                .unwrap()
+        })
+        .collect::<String>();
+    let wnmcid = format!(
+        "{}.{}.01.0",
+        wnmcid_prefix,
+        SystemTime::now().duration_since(UNIX_EPOCH)?.as_millis()
+    );
     let resp = match crypto {
         Crypto::Api => {
             HTTP_CLIENT
@@ -194,8 +217,7 @@ async fn login_request(
                 ))
                 .header(
                     "Cookie",
-                    cookie.unwrap_or("NMTID=; MUSIC_U=; __remember_me=true; os=pc".to_string()),
-                )
+                    format!("__remember_me=true; os=pc; _ntes_nuid={}; WNMCID={}; WEVNSM=1.0.0; osver=Microsoft-Windows-10-Professional-build-19045-64bit; deviceId=114514; os=pc; channel=netease; appver=3.1.17.204416", ntes_nuid, wnmcid))
                 .send()
                 .await?
         }
@@ -209,7 +231,7 @@ async fn login_request(
                 .post(format!("{}{}", WEAPI_END_POINT, api))
                 .body(data)
                 .header("Content-Type", "application/x-www-form-urlencoded")
-                .header("Cookie", "NMTID=; MUSIC_U=; __remember_me=true; os=pc")
+                .header("Cookie", format!("__remember_me=true; os=pc; _ntes_nuid={}; WNMCID={}; WEVNSM=1.0.0; osver=Microsoft-Windows-10-Professional-build-19045-64bit; deviceId=114514; os=pc; channel=netease; appver=3.1.17.204416", ntes_nuid, wnmcid))
                 .send()
                 .await?
         }
@@ -222,7 +244,7 @@ async fn login_request(
                 .post(format!("{}{}", EAPI_END_POINT, api))
                 .body(data)
                 .header("Content-Type", "application/x-www-form-urlencoded")
-                .header("Cookie", "NMTID=; MUSIC_U=; __remember_me=true; os=pc")
+                .header("Cookie", format!("__remember_me=true; os=pc; _ntes_nuid={}; WNMCID={}; WEVNSM=1.0.0; osver=Microsoft-Windows-10-Professional-build-19045-64bit; deviceId=114514; os=pc; channel=netease; appver=3.1.17.204416", ntes_nuid, wnmcid))
                 .send()
                 .await?
         }
@@ -239,7 +261,7 @@ async fn login_request(
                 .post(LINUXAPI_END_POINT)
                 .body(data)
                 .header("Content-Type", "application/x-www-form-urlencoded")
-                .header("Cookie", "NMTID=; MUSIC_U=; __remember_me=true; os=pc")
+                .header("Cookie", format!("__remember_me=true; os=pc; _ntes_nuid={}; WNMCID={}; WEVNSM=1.0.0; osver=Deepin 20.9; deviceId=114514; os=linux; channel=netease; appver=1.2.1.0428", ntes_nuid, wnmcid))
                 .send()
                 .await?
         }

@@ -3,7 +3,7 @@ use crate::constant::*;
 use md5;
 use serde_json::{Value, json};
 
-const API: &str = "login/cellphone";
+const API: &str = "w/login/cellphone";
 
 /// 手机密码登录
 pub async fn login_cellphone_with_password(
@@ -13,12 +13,14 @@ pub async fn login_cellphone_with_password(
     crypto: Option<Crypto>,
 ) -> Result<(Value, Cookie), Box<dyn std::error::Error>> {
     let data = json!({
+      "type": "1",
+      "https": "true",
       "phone": phone,
       "countrycode": countrycode.unwrap_or("86".to_string()),
       "password": format!("{:x}", md5::compute(password.as_bytes())),
-      "rememberLogin": "true",
+      "remember": "true",
     });
-    let resp = login_request(API.to_string(), data, None, crypto.unwrap_or(Crypto::Api)).await?;
+    let resp = login_request(API.to_string(), data, crypto.unwrap_or(Crypto::Api)).await?;
 
     Ok(resp)
 }
@@ -31,12 +33,14 @@ pub async fn login_cellphone_with_captcha(
     crypto: Option<Crypto>,
 ) -> Result<(Value, String), Box<dyn std::error::Error>> {
     let data = json!({
+      "type": "1",
+      "https": "true",
       "phone": phone,
       "countrycode": countrycode.unwrap_or("86".to_string()),
       "captcha": captcha,
-      "rememberLogin": "true",
+      "remember": "true",
     });
-    let resp = login_request(API.to_string(), data, None, crypto.unwrap_or(Crypto::Api)).await?;
+    let resp = login_request(API.to_string(), data, crypto.unwrap_or(Crypto::Api)).await?;
 
     Ok(resp)
 }
