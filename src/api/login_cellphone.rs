@@ -20,7 +20,7 @@ pub async fn login_cellphone_with_password(
       "password": format!("{:x}", md5::compute(password.as_bytes())),
       "remember": "true",
     });
-    let resp = login_request(API.to_string(), data, crypto.unwrap_or(Crypto::Api)).await?;
+    let resp = login_request(API.to_string(), data, None, crypto.unwrap_or(Crypto::Api)).await?;
 
     Ok(resp)
 }
@@ -40,7 +40,7 @@ pub async fn login_cellphone_with_captcha(
       "captcha": captcha,
       "remember": "true",
     });
-    let resp = login_request(API.to_string(), data, crypto.unwrap_or(Crypto::Api)).await?;
+    let resp = login_request(API.to_string(), data, None, crypto.unwrap_or(Crypto::Api)).await?;
 
     Ok(resp)
 }
